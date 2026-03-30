@@ -30,11 +30,11 @@ The key insight: as jackpots grow, ticket sales explode exponentially, increasin
    ```
 3. Open `powerball_ev.jl` in the Pluto interface
 
-## Running in the Browser (No Install)
+## View Online (No Install)
 
-Click the badge below to launch an interactive session via Binder:
+**[View the notebook on GitHub Pages](https://pyrex41.github.io/powerball-ev/)**
 
-[![Open in Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/open?url=https://raw.githubusercontent.com/pyrex41/powerball-ev/main/powerball_ev.jl)
+The static HTML export includes all outputs, plots, and the full mathematical derivation. Built automatically via GitHub Actions on every push.
 
 ## License
 

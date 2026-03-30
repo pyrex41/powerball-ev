@@ -1,0 +1,42 @@
+name: Export Pluto notebook to HTML and deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: "1.11"
+
+      - name: Install dependencies and export notebook
+        run: |
+          julia -e '
+            using Pkg
+            Pkg.add(["Pluto", "PlutoSliderServer"])
+            import PlutoSliderServer
+            PlutoSliderServer.export_notebook("powerball_ev.jl")
+          '
+
+      - name: Prepare deploy directory
+        run: |
+          mkdir -p _site
+          mv powerball_ev.html _site/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          force_orphan: true
